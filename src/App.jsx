@@ -10,8 +10,26 @@ import ContactSection from './components/ContactSection';
 import InstagramPreview from './components/InstagramPreview';
 import About from './pages/About';
 import Collection from './pages/Collection';
+import { useEffect, useState } from 'react';
+import LoadingScreen from './pages/LoadingScreen';
+
 
 function App() {
+   const [loading, setLoading] = useState(true);
+    useEffect(() => {
+    const handleLoad = () => {
+      setTimeout(() => setLoading(false), 800); // wait a bit for smooth feel
+    };
+
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
+    }
+  }, []);
+
+  if (loading) return <LoadingScreen />;
   return (
     <div>
       <Navbar />

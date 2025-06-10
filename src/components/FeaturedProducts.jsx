@@ -5,42 +5,42 @@ import { Link, useNavigate } from "react-router-dom";
 const products = [
   {
     id: 1,
-    title: "Gold Necklace",
+    title: "Hapmers",
     image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451466/pexels-leeloothefirst-6675837_ohcr0x.jpg",
     size: "md:row-span-2",
     category: "Necklaces"
   },
   {
     id: 2,
-    title: "Silver Earrings",
+    title: "Birthday",
     image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749449531/3_wdk9am.png",
     size: "md:col-span-2 md:row-span-2",
     category: "Earrings"
   },
   {
     id: 3,
-    title: "Diamond Ring",
+    title: "Diamond",
     image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451463/pexels-alleksana-6478824_wu9r5q.jpg",
     size: "",
     category: "Rings"
   },
   {
     id: 4,
-    title: "Bracelet",
+    title: "Valentine",
     image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451473/pexels-koolshooters-6087540_rerw6m.jpg",
     size: "md:row-span-2",
     category: "Bracelets"
   },
   {
     id: 5,
-    title: "Anklet",
+    title: "PhotoFrame",
     image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451465/pexels-pixabay-264771_nt6txh.jpg",
     size: "",
     category: "Anklets"
   },
   {
     id: 6,
-    title: "Brooch",
+    title: "Hampers",
     image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749449530/4_gqobpb.png",
     size: "md:col-span-2",
     category: "Accessories"
@@ -77,7 +77,7 @@ const handleRedirect = () => {
           Featured Products
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Discover our exquisite collection of handcrafted jewelry pieces
+          Discover our exquisite collection of handcrafted gifts.
         </p>
       </motion.div>
 
@@ -118,14 +118,14 @@ const handleRedirect = () => {
                   {product.title}
                 </h3>
                 
-                <motion.button
+                {/* <motion.button
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.2 }}
                   className="text-xs sm:text-sm bg-white text-gray-900 font-medium px-3 py-1 sm:px-4 sm:py-2 rounded-full hover:bg-gray-100 transition-all shadow-sm hover:shadow-md"
                 >
                   View Details
-                </motion.button>
+                </motion.button> */}
               </motion.div>
             </div>
           </motion.div>

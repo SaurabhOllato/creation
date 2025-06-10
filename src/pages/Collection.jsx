@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import ContactSection from "../components/ContactSection";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 // Dummy product data with more details
 const allProducts = [
@@ -168,18 +170,18 @@ export default function Collection() {
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
         <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-center z-10"
-                >
-                  <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase mb-4">
-                    Our Collection
-                  </h2>
-                  <p className="text-xl text-white max-w-2xl mx-auto">
-                    {/* Crafting meaningful gifts with passion and creativity */}
-                  </p>
-                </motion.div>
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center z-10"
+        >
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase mb-4">
+            Our Collection
+          </h2>
+          <p className="text-xl text-white max-w-2xl mx-auto">
+            {/* Crafting meaningful gifts with passion and creativity */}
+          </p>
+        </motion.div>
       </div>
 
       {/* Main Content */}
@@ -222,7 +224,7 @@ export default function Collection() {
               className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200"
             >
               <div className="relative overflow-hidden aspect-square">
-                <img
+                <LazyLoadImage
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -253,8 +255,6 @@ export default function Collection() {
           </div>
         )}
       </div>
-          
-
     </section>
   );
 }
