@@ -41,7 +41,7 @@ const fadeInUp = {
 export default function WhyChooseUs() {
   return (
     <>
-    <section className="bg-gradient-to-br from-[#fef6f9] to-[#f7faff] py-20 px-6">
+    <section className="bg-gradient-to-br from-[#fef6f9] to-[#f7faff] py-10 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
           className="text-4xl font-bold text-gray-800 mb-6"
