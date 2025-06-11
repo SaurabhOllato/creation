@@ -5,38 +5,38 @@ import { Link, useNavigate } from "react-router-dom";
 const products = [
   {
     id: 1,
-    title: "Hapmers",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451466/pexels-leeloothefirst-6675837_ohcr0x.jpg",
+    title: "Transparent Box Hamper",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625192/WhatsApp_Image_2025-06-09_at_8.27.01_PM_otc1ri.jpg",
     size: "md:row-span-2",
-    category: "Necklaces"
+    category: "Hamper Gifts"
   },
   {
     id: 2,
     title: "Birthday",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749449531/3_wdk9am.png",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
     size: "md:col-span-2 md:row-span-2",
-    category: "Earrings"
+    category: "Birthday hampers"
   },
   {
     id: 3,
-    title: "Diamond",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451463/pexels-alleksana-6478824_wu9r5q.jpg",
+    title: "Frame",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625184/WhatsApp_Image_2025-06-09_at_8.26.57_PM_1_oc7d8e.jpg",
     size: "",
-    category: "Rings"
+    category: "Photo Frames"
   },
   {
     id: 4,
-    title: "Valentine",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451473/pexels-koolshooters-6087540_rerw6m.jpg",
+    title: "Kids Hampers",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625171/WhatsApp_Image_2025-06-09_at_8.26.45_PM_ylgel9.jpg",
     size: "md:row-span-2",
-    category: "Bracelets"
+    category: "Kids Gifts"
   },
   {
     id: 5,
-    title: "PhotoFrame",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451465/pexels-pixabay-264771_nt6txh.jpg",
+    title: "Birthday Gift",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.53_PM_1_rpglgp.jpg",
     size: "",
-    category: "Anklets"
+    category: "Birthday Gift Items"
   },
   {
     id: 6,

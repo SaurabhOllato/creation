@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 const heroContent = [
   {
     image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451473/pexels-ozge-k-2150194444-31038771_natxdg.jpg",
+      // "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451473/pexels-ozge-k-2150194444-31038771_natxdg.jpg",
+    "  https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
     title: "Gifts That Speak Your Heart",
     subtitle: "Custom-Made Surprises for Every Special Moment",
     cta: "Explore Our Portfolio",

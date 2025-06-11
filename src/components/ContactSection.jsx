@@ -29,7 +29,7 @@ export default function ContactSection() {
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
           <motion.a
-            href="https://www.instagram.com/your_instagram_here"
+            href="https://instagram.com/Suhanis_creations"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-pink-500 text-white px-6 py-3 rounded-full flex items-center gap-2 hover:bg-pink-600 transition"
@@ -56,7 +56,7 @@ export default function ContactSection() {
             transition={{ delay: 0.5 }}
           >
             <FaPhone />
-            <span>+91 9876543210</span>
+            <span>+91 8446055677</span>
           </motion.div>
         </div>
       </div>

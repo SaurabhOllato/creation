@@ -11,38 +11,38 @@ const offerings = [
   {
     title: "Customized Photo Frames",
     description: "Personalized frames for your cherished memories",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749462782/1_zk3bpm.png",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625185/WhatsApp_Image_2025-06-09_at_8.27.00_PM_1_rxrbqv.jpg",
   },
   {
     title: "Spotify Plaques",
     description: "Your favorite songs immortalized in elegant plaques",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749462786/2_zurhky.png",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625184/WhatsApp_Image_2025-06-09_at_8.26.58_PM_1_ekmgts.jpg",
   },
   {
     title: "Gift Hampers",
     description: "Thoughtfully curated gift collections",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749454732/WhatsApp_Image_2025-06-08_at_7.30.15_PM_em50pp.jpg",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625170/WhatsApp_Image_2025-06-09_at_8.26.44_PM_j1zib2.jpg",
   },
   {
     title: "Personalized Art",
     description: "Custom artwork tailored to your story",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451465/pexels-pixabay-264771_nt6txh.jpg",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.52_PM_saug5n.jpg",
   },
   {
     title: "Special Occasion Boxes",
     description: "Themed gift boxes for every celebration",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749454731/WhatsApp_Image_2025-06-08_at_7.30.17_PM_tgum5d.jpg",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
   },
   {
     title: "Anniversary Gifts",
     description: "Celebrate love with our unique creations",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749454731/WhatsApp_Image_2025-06-08_at_7.30.17_PM_tgum5d.jpg",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.53_PM_1_rpglgp.jpg",
   },
   {
     title: "Explore More",
     description: "Discover our full collection of gifts",
     image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    link: "/all-categories",
+    link: "/collection",
   },
 ];
 
@@ -149,7 +149,7 @@ export default function WhatWeOffer() {
 
 function OfferCard({ offer, index }) {
   return (
-    <motion.div
+      <motion.div
       className="relative rounded-xl overflow-hidden shadow-lg h-64 sm:h-72 lg:h-80 w-full"
       style={{
         backgroundImage: `url(${offer.image})`,
@@ -177,17 +177,17 @@ function OfferCard({ offer, index }) {
           <p className="text-sm md:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-4">
             {offer.description}
           </p>
-          <motion.button
-            className={`px-4 py-2 rounded-full text-sm font-medium ${
-              offer.link 
-                ? "bg-white text-pink-600 hover:bg-gray-100" 
-                : "bg-pink-600 hover:bg-pink-700"
-            } transition-colors duration-300 self-start`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {offer.link ? "View All" : "Explore"}
-          </motion.button>
+
+          {/* Only show button on last card */}
+          {index === offerings.length - 1 && (
+            <motion.button
+              className="px-4 py-2 rounded-full text-sm font-medium bg-white text-pink-600 hover:bg-gray-100 transition-colors duration-300 self-start"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View All
+            </motion.button>
+          )}
         </motion.div>
       </div>
     </motion.div>
