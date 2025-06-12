@@ -266,10 +266,15 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { FaWhatsapp } from "react-icons/fa";
 
-// Use Vite's import.meta.env for environment variables
+// Environment Variables
 const token = import.meta.env.VITE_AIRTABLE_TOKEN;
 const baseId = import.meta.env.VITE_AIRTABLE_BASE_ID;
 const tableName = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
+
+// Optional: Skeleton placeholder component (should be implemented separately)
+const ProductSkeleton = () => (
+  <div className="bg-gray-100 animate-pulse rounded-lg h-60"></div>
+);
 
 export default function Collection() {
   const [products, setProducts] = useState([]);
@@ -283,14 +288,11 @@ export default function Collection() {
         setLoading(true);
         setError(null);
 
-        // Validate environment variables
         if (!token || !baseId || !tableName) {
-          throw new Error(
-            "Missing Airtable configuration. Please check your environment variables."
-          );
+          throw new Error("Missing Airtable config.");
         }
 
-        const response = await axios.get(
+        const res = await axios.get(
           `https://api.airtable.com/v0/${baseId}/${tableName}`,
           {
             headers: {
@@ -299,25 +301,21 @@ export default function Collection() {
           }
         );
 
-        console.log("✅ Airtable Data:", response.data.records);
-        const mappedProducts = response.data.records.map((record) => ({
-          id: record.id,
-          name: record.fields.Name,
-          category: record.fields.Category,
-          image:
-            record.fields.Image && record.fields.Image[0]?.url
-              ? record.fields.Image[0].url
-              : "https://via.placeholder.com/300",
-          price: record.fields.Price || 0,
-          rating: record.fields.Rating || 0,
+        const records = res.data.records || [];
+
+        const mapped = records.map((rec) => ({
+          id: rec.id,
+          name: rec.fields?.Name || "Unnamed Product",
+          category: rec.fields?.Category || "Uncategorized",
+          image: rec.fields?.Image?.[0]?.url || "https://via.placeholder.com/300",
+          price: rec.fields?.Price || 0,
+          rating: rec.fields?.Rating || 0,
         }));
 
-        setProducts(mappedProducts);
-      } catch (error) {
-        console.error("Error fetching Airtable data:", error);
-        setError(
-          error.message || "Failed to fetch products. Please try again later."
-        );
+        setProducts(mapped);
+      } catch (err) {
+        console.error("❌ Airtable Error:", err);
+        setError("Failed to load products. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -328,19 +326,18 @@ export default function Collection() {
 
   const categories = [
     "All",
-    ...Array.from(new Set(products.map((item) => item.category))),
-  ].filter(Boolean); // Filter out any undefined categories
+    ...Array.from(new Set(products.map((p) => p.category))),
+  ].filter(Boolean);
 
   const filteredProducts =
     selectedCategory === "All"
       ? products
-      : products.filter((item) => item.category === selectedCategory);
-  console.log(filteredProducts);
+      : products.filter((p) => p.category === selectedCategory);
 
   return (
     <section className="relative">
       {/* Hero Banner */}
-      <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451441/pexels-vladvictoria-10361386_ghcgcd.jpg')] bg-cover bg-center bg-no-repeat h-48 sm:h-64 md:h-80 w-full flex items-center justify-center relative">
+      <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451441/pexels-vladvictoria-10361386_ghcgcd.jpg')] bg-cover bg-center h-48 sm:h-64 md:h-80 flex items-center justify-center relative">
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -348,56 +345,39 @@ export default function Collection() {
           transition={{ duration: 0.6 }}
           className="text-center z-10"
         >
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase mb-4">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase">
             Our Collection
           </h2>
         </motion.div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {/* Error Message */}
+        {/* Error */}
         {error && (
-          <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <svg
-                  className="h-5 w-5 text-red-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm text-red-700">{error}</p>
-              </div>
-            </div>
+          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
+            {error}
           </div>
         )}
 
-        {/* Loading State */}
+        {/* Loading */}
         {loading && (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 py-12">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductSkeleton key={i} />
+            ))}
           </div>
-        
         )}
 
         {/* Category Filters */}
         {!loading && !error && (
-          <div className="mb-8 sm:mb-10">
-            <div className="flex space-x-2 pb-2 overflow-x-auto scrollbar-hide sm:overflow-x-visible sm:flex-wrap sm:gap-2">
+          <div className="mb-8">
+            <div className="flex space-x-2 overflow-x-auto scrollbar-hide sm:flex-wrap sm:gap-2">
               {categories.map((category) => (
                 <motion.button
                   key={category}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setSelectedCategory(category)}
-                  className={`whitespace-nowrap px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border transition-all duration-200 text-xs sm:text-sm font-medium ${
+                  className={`px-4 py-2 text-sm rounded-full border font-medium ${
                     selectedCategory === category
                       ? "bg-black text-white border-black"
                       : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -410,37 +390,36 @@ export default function Collection() {
           </div>
         )}
 
-        {/* Products Grid */}
+        {/* Product Grid */}
         {!loading && !error && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
           >
             {filteredProducts.map((product) => (
               <motion.div
                 key={product.id}
                 whileHover={{ y: -3 }}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 group relative"
+                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-200 group relative"
               >
-                <div className="relative overflow-hidden aspect-square">
+                <div className="relative aspect-square overflow-hidden">
                   <LazyLoadImage
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     effect="blur"
-                    loading="lazy"
                   />
 
-                  {/* WhatsApp button on hover */}
+                  {/* WhatsApp CTA */}
                   <a
                     href={`https://wa.me/918446055677?text=Hi%2C%20I%20am%20interested%20in%20this%20product%3A%20${encodeURIComponent(
                       product.name
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
                     <div className="flex items-center gap-2 text-sm font-medium">
                       <FaWhatsapp className="text-lg" />
@@ -450,26 +429,24 @@ export default function Collection() {
                 </div>
 
                 <div className="p-3 sm:p-4">
-                  <h3 className="font-medium text-sm sm:text-base text-gray-800 line-clamp-1">
+                  <h3 className="text-sm sm:text-base font-medium text-gray-800 line-clamp-1">
                     {product.name}
                   </h3>
-                  <p className="text-gray-500 text-xs sm:text-sm mt-1">
-                    {/* {product.category} */}
-                  </p>
+                  {/* <p className="text-xs text-gray-500 mt-1">{product.category}</p> */}
                 </div>
               </motion.div>
             ))}
           </motion.div>
         )}
 
-        {/* Empty State */}
+        {/* No Products */}
         {!loading && !error && filteredProducts.length === 0 && (
           <div className="text-center py-12 sm:py-20">
-            <h3 className="text-lg sm:text-xl font-medium text-gray-700">
+            <h3 className="text-lg font-medium text-gray-700">
               No products found
             </h3>
-            <p className="text-gray-500 mt-2 text-sm sm:text-base">
-              Try selecting a different category
+            <p className="text-sm text-gray-500 mt-2">
+              Try selecting a different category.
             </p>
           </div>
         )}
