@@ -264,6 +264,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { FaWhatsapp } from "react-icons/fa";
 
 // Use Vite's import.meta.env for environment variables
 const token = import.meta.env.VITE_AIRTABLE_TOKEN;
@@ -281,10 +282,12 @@ export default function Collection() {
       try {
         setLoading(true);
         setError(null);
-        
+
         // Validate environment variables
-      if (!token || !baseId || !tableName) {
-          throw new Error("Missing Airtable configuration. Please check your environment variables.");
+        if (!token || !baseId || !tableName) {
+          throw new Error(
+            "Missing Airtable configuration. Please check your environment variables."
+          );
         }
 
         const response = await axios.get(
@@ -312,7 +315,9 @@ export default function Collection() {
         setProducts(mappedProducts);
       } catch (error) {
         console.error("Error fetching Airtable data:", error);
-        setError(error.message || "Failed to fetch products. Please try again later.");
+        setError(
+          error.message || "Failed to fetch products. Please try again later."
+        );
       } finally {
         setLoading(false);
       }
@@ -330,7 +335,7 @@ export default function Collection() {
     selectedCategory === "All"
       ? products
       : products.filter((item) => item.category === selectedCategory);
-      console.log(filteredProducts);
+  console.log(filteredProducts);
 
   return (
     <section className="relative">
@@ -416,17 +421,33 @@ export default function Collection() {
               <motion.div
                 key={product.id}
                 whileHover={{ y: -3 }}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200"
+                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 group relative"
               >
                 <div className="relative overflow-hidden aspect-square">
                   <LazyLoadImage
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     effect="blur"
                     loading="lazy"
                   />
+
+                  {/* WhatsApp button on hover */}
+                  <a
+                    href={`https://wa.me/918446055677?text=Hi%2C%20I%20am%20interested%20in%20this%20product%3A%20${encodeURIComponent(
+                      product.name
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="flex items-center gap-2 text-sm font-medium">
+                      <FaWhatsapp className="text-lg" />
+                      Chat on WhatsApp
+                    </div>
+                  </a>
                 </div>
+
                 <div className="p-3 sm:p-4">
                   <h3 className="font-medium text-sm sm:text-base text-gray-800 line-clamp-1">
                     {product.name}

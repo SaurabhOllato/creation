@@ -51,7 +51,7 @@ const Navbar = () => {
               alt="Suhani's Creations"
               className="h-10 w-auto transition-all duration-300"
             /> */}
-            <h1 className="text-xl font-bold tracking-tighter leading-none">
+            <h1 className="text-xl font-medium tracking-tighter leading-none">
               <span className={`transition-colors duration-300 ${scrolled ? "text-gray-900" : "text-white"}`}>
                 SUHANI'S CREATIONS
               </span>
@@ -119,7 +119,7 @@ const Navbar = () => {
       >
         <ul
           className={`${
-            scrolled ? "bg-white" : "bg-gray-900/95"
+            scrolled ? "bg-white" : "bg-white-900/95"
           } text-center py-4 px-6 space-y-4 backdrop-blur-md`}
         >
           {navItems.map((item) => (

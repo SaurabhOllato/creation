@@ -45,8 +45,13 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <FaEnvelope />
-            <span>customizegifts@example.com</span>
+             <a
+    href="mailto:Suhanis_creations@gmail.com"
+    className="flex items-center gap-2 hover:underline"
+  >
+    <FaEnvelope />
+    <span>Suhanis_creations@gmail.com</span>
+  </a>
           </motion.div>
 
           <motion.div
@@ -55,8 +60,13 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <FaPhone />
-            <span>+91 8446055677</span>
+             <a
+    href="tel:+918446055677"
+    className="flex items-center gap-2 hover:underline"
+  >
+    <FaPhone />
+    <span>+91 8446055677</span>
+  </a>
           </motion.div>
         </div>
       </div>

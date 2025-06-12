@@ -5,7 +5,7 @@ const heroContent = [
   {
     image:
       // "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451473/pexels-ozge-k-2150194444-31038771_natxdg.jpg",
-    "  https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
+    "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.54_PM_te1xo6.jpg",
     title: "Gifts That Speak Your Heart",
     subtitle: "Custom-Made Surprises for Every Special Moment",
     cta: "Explore Our Portfolio",
@@ -41,7 +41,8 @@ const heroContent = [
   },
   {
     image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451455/pexels-tamanna-rumee-52377920-7985010_womqf8.jpg",
+      // "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451455/pexels-tamanna-rumee-52377920-7985010_womqf8.jpg",
+     " https://res.cloudinary.com/dxscy1ixg/image/upload/v1749711275/hero_xxg4hp.jpg",
     title: "Gifts as Unique as Your Love",
     subtitle: "From Birthdays to Weddings, We Personalize It All",
     cta: "Get a Free Quote",
@@ -122,7 +123,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative h-screen min-h-[90vh] overflow-hidden"
+      className="relative h-[90vh] lg:min-h-screen overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
