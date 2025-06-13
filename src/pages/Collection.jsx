@@ -265,6 +265,7 @@ import { motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { FaWhatsapp } from "react-icons/fa";
+import { XMarkIcon } from "@heroicons/react/16/solid";
 
 // Environment Variables
 const token = import.meta.env.VITE_AIRTABLE_TOKEN;
@@ -281,6 +282,7 @@ export default function Collection() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -337,124 +339,243 @@ export default function Collection() {
 
   return (
     <section className="relative">
-      {/* Hero Banner */}
-      <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749711275/hero_xxg4hp.jpg')] bg-cover bg-center h-48 sm:h-64 md:h-80 flex items-center justify-center relative">
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center z-10"
-        >
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase">
-            Our Collection
-          </h2>
-        </motion.div>
-      </div>
+  {/* Hero Banner - Improved with better contrast and responsive height */}
+  <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749711275/hero_xxg4hp.jpg')] bg-cover bg-center h-56 sm:h-72 md:h-96 lg:h-[28rem] flex items-center justify-center relative">
+    <div className="absolute inset-0 bg-black/40"></div>
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-center z-10 px-4"
+    >
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white uppercase tracking-tight">
+        Our Collection
+      </h1>
+      <p className="mt-3 text-white/90 max-w-md mx-auto text-sm md:text-base">
+        Discover our premium selection of products
+      </p>
+    </motion.div>
+  </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {/* Error */}
-        {error && (
-          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
-            {error}
+  <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-16">
+    {/* Error State - More prominent and actionable */}
+    {error && (
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8 flex items-start"
+      >
+        <div className="flex-shrink-0">
+          <ExclamationCircleIcon className="h-5 w-5 text-red-400" />
+        </div>
+        <div className="ml-3">
+          <h3 className="text-sm font-medium text-red-800">Error loading products</h3>
+          <div className="mt-2 text-sm text-red-700">
+            <p>{error}</p>
           </div>
-        )}
-
-        {/* Loading */}
-        {loading && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 py-12">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <ProductSkeleton key={i} />
-            ))}
+          <div className="mt-4">
+            <button
+              onClick={() => window.location.reload()}
+              className="text-sm font-medium text-red-700 hover:text-red-600"
+            >
+              Try again <span aria-hidden="true">&rarr;</span>
+            </button>
           </div>
-        )}
+        </div>
+      </motion.div>
+    )}
 
-        {/* Category Filters */}
-        {!loading && !error && (
-          <div className="mb-8">
-            <div className="flex space-x-2 overflow-x-auto scrollbar-hide sm:flex-wrap sm:gap-2">
-              {categories.map((category) => (
-                <motion.button
-                  key={category}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 text-sm rounded-full border font-medium ${
-                    selectedCategory === category
-                      ? "bg-black text-white border-black"
-                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-                  }`}
-                >
-                  {category}
-                </motion.button>
-              ))}
+    {/* Loading State - More realistic skeleton */}
+    {loading && (
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 py-12">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i} className="bg-white rounded-lg overflow-hidden shadow-sm">
+            <div className="aspect-square bg-gray-200 animate-pulse"></div>
+            <div className="p-4 space-y-2">
+              <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-3 bg-gray-200 rounded animate-pulse w-3/4"></div>
             </div>
           </div>
-        )}
-
-        {/* Product Grid */}
-        {!loading && !error && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
-          >
-            {filteredProducts.map((product) => (
-              <motion.div
-                key={product.id}
-                whileHover={{ y: -3 }}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition duration-200 group relative"
-              >
-                <div className="relative aspect-square overflow-hidden">
-                  <LazyLoadImage
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    effect="blur"
-                  />
-
-                  {/* WhatsApp CTA */}
-                  <a
-                    href={`https://wa.me/918446055677?text=Hi%2C%20I%20am%20interested%20in%20this%20product%3A%20${encodeURIComponent(
-                      product.name
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute hidden lg:flex inset-0 flex items-center justify-center bg-black bg-opacity-30 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <div className="flex items-center gap-2 text-sm font-medium">
-                      <FaWhatsapp className="text-lg" />
-                      Order on WhatsApp
-                    </div>
-                  </a>
-                  
-                </div>
-
-                <div className="p-3 sm:p-4">
-                  <h3 className="text-sm sm:text-base font-medium text-gray-800 line-clamp-1">
-                    {product.name}
-                  </h3>
-                  {/* <p className="text-xs text-gray-500 mt-1">{product.category}</p> */}
-                  
-                </div>
-              </motion.div>
-            ))}
-            
-          </motion.div>
-        )}
-
-        {/* No Products */}
-        {!loading && !error && filteredProducts.length === 0 && (
-          <div className="text-center py-12 sm:py-20">
-            <h3 className="text-lg font-medium text-gray-700">
-              No products found
-            </h3>
-            <p className="text-sm text-gray-500 mt-2">
-              Try selecting a different category.
-            </p>
-          </div>
-        )}
+        ))}
       </div>
-    </section>
+    )}
+
+    {/* Category Filters - Improved accessibility and sticky positioning */}
+    {!loading && !error && (
+      <div className="mb-10 sticky top-0 bg-white py-4 z-10">
+        <h2 className="sr-only">Product categories</h2>
+        <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide sm:flex-wrap sm:gap-2 sm:overflow-visible">
+          {['All', ...categories].map((category) => (
+            <motion.button
+              key={category}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedCategory(category === 'All' ? null : category)}
+              className={`px-4 py-2 text-sm rounded-full border font-medium whitespace-nowrap transition-colors ${
+                (category === 'All' && !selectedCategory) || selectedCategory === category
+                  ? "bg-black text-white border-black"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+              }`}
+              aria-current={
+                (category === 'All' && !selectedCategory) || selectedCategory === category 
+                ? "true" : "false"
+              }
+            >
+              {category}
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {/* Product Grid - Better spacing and hover effects */}
+    {!loading && !error && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
+        {filteredProducts.map((product) => (
+          <motion.div
+            key={product.id}
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 group relative"
+          >
+            <div
+              className="relative aspect-square overflow-hidden cursor-pointer"
+              onClick={() => setSelectedProduct(product)}
+              aria-label={`View details for ${product.name}`}
+            >
+              <LazyLoadImage
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                effect="opacity"
+                threshold={100}
+              />
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-colors"></div>
+            </div>
+
+            <div className="p-4">
+              <h3 className="text-sm font-medium text-gray-800 line-clamp-2 h-10">
+                {product.name}
+              </h3>
+              <div className="mt-3 flex justify-between items-center">
+                <span className="text-xs text-gray-500">{product.category}</span>
+                <button 
+                  onClick={() => setSelectedProduct(product)}
+                  className="text-xs font-medium text-gray-700 hover:text-black"
+                >
+                  Quick view
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    )}
+
+    {/* Product Modal - Enhanced with more details and better buttons */}
+    {selectedProduct && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+        onClick={() => setSelectedProduct(null)}
+      >
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          className="bg-white rounded-xl overflow-hidden max-w-2xl w-full max-h-[90vh] flex flex-col"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => setSelectedProduct(null)}
+            className="absolute top-4 right-4 z-10 p-1 rounded-full bg-white/80 hover:bg-gray-100 transition"
+            aria-label="Close product details"
+          >
+            <XMarkIcon className="h-6 w-6 text-gray-700" />
+          </button>
+
+          <div className="overflow-y-auto">
+            <div className="relative h-64 sm:h-80 bg-gray-100">
+              <img
+                src={selectedProduct.image}
+                alt={selectedProduct.name}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <div className="p-6">
+              <div className="mb-4">
+                <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  {selectedProduct.category}
+                </span>
+                <h2 className="text-xl font-bold text-gray-900 mt-1">
+                  {selectedProduct.name}
+                </h2>
+                {selectedProduct.description && (
+                  <p className="mt-3 text-gray-600 text-sm">
+                    {selectedProduct.description}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                <a
+                  href={`https://wa.me/918446055677?text=Hi%2C%20I%20am%20interested%20in%20this%20product%3A%20${encodeURIComponent(
+                    selectedProduct.name
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-3 rounded-lg transition"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                  Order on WhatsApp
+                </a>
+                <button
+                  onClick={() => setSelectedProduct(null)}
+                  className="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium px-4 py-3 rounded-lg transition"
+                >
+                  Continue Browsing
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    )}
+
+    {/* Empty State - More visually appealing */}
+    {!loading && !error && filteredProducts.length === 0 && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="text-center py-16 sm:py-24"
+      >
+        <div className="mx-auto h-24 w-24 text-gray-400">
+          <CubeTransparentIcon className="w-full h-full" />
+        </div>
+        <h3 className="mt-4 text-lg font-medium text-gray-900">
+          No products found
+        </h3>
+        <p className="mt-2 text-sm text-gray-500">
+          We couldn't find any products matching your selection.
+        </p>
+        <div className="mt-6">
+          <button
+            onClick={() => setSelectedCategory(null)}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-gray-800 focus:outline-none"
+          >
+            View all products
+          </button>
+        </div>
+      </motion.div>
+    )}
+  </div>
+</section>
   );
 }

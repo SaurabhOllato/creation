@@ -15,7 +15,7 @@ const testimonials = [
     name: "Riya Mehta",
     comment:
       "Absolutely loved the personalized hamper! It was beautiful, thoughtful, and delivered on time. Highly recommend!",
-    location: "Mumbai",
+    location: "Goa",
   },
   {
     name: "Aman Joshi",
@@ -33,13 +33,13 @@ const testimonials = [
     name: "Priyanka Sharma",
     comment:
       "Beautifully packed, amazing quality, and such sweet communication. I’ll definitely order again.",
-    location: "Pune",
+    location: "Gondia",
   },
   {
     name: "Poonam Chaurasia",
     comment:
       "Beautifully packed, amazing quality, and such sweet communication. I’ll definitely order again.",
-    location: "Pune",
+    location: "Mumbai",
   },
 ];
 
