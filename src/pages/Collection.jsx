@@ -307,7 +307,8 @@ export default function Collection() {
           id: rec.id,
           name: rec.fields?.Name || "Unnamed Product",
           category: rec.fields?.Category || "Uncategorized",
-          image: rec.fields?.Image?.[0]?.url || "https://via.placeholder.com/300",
+          image:
+            rec.fields?.Image?.[0]?.url || "https://via.placeholder.com/300",
           price: rec.fields?.Price || 0,
           rating: rec.fields?.Rating || 0,
         }));
@@ -337,7 +338,7 @@ export default function Collection() {
   return (
     <section className="relative">
       {/* Hero Banner */}
-      <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451441/pexels-vladvictoria-10361386_ghcgcd.jpg')] bg-cover bg-center h-48 sm:h-64 md:h-80 flex items-center justify-center relative">
+      <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749711275/hero_xxg4hp.jpg')] bg-cover bg-center h-48 sm:h-64 md:h-80 flex items-center justify-center relative">
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -419,13 +420,14 @@ export default function Collection() {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute hidden lg:flex inset-0 flex items-center justify-center bg-black bg-opacity-30 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
                     <div className="flex items-center gap-2 text-sm font-medium">
                       <FaWhatsapp className="text-lg" />
-                      Chat on WhatsApp
+                      Order on WhatsApp
                     </div>
                   </a>
+                  
                 </div>
 
                 <div className="p-3 sm:p-4">
@@ -433,9 +435,11 @@ export default function Collection() {
                     {product.name}
                   </h3>
                   {/* <p className="text-xs text-gray-500 mt-1">{product.category}</p> */}
+                  
                 </div>
               </motion.div>
             ))}
+            
           </motion.div>
         )}
 

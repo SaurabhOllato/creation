@@ -71,7 +71,7 @@ export default function About() {
     <div className="bg-gray-50">
       {/* Hero Section */}
       <section
-        className="relative bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749451441/pexels-vladvictoria-10361386_ghcgcd.jpg')] bg-cover bg-center bg-no-repeat h-96 md:h-[500px] flex items-center justify-center mb-12 px-6 py-10"
+        className="relative bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.54_PM_te1xo6.jpg')] bg-cover bg-center bg-no-repeat h-48 sm:h-64 md:h-80  flex items-center justify-center mb-12 px-6 py-10"
         style={{
           backgroundBlendMode: "overlay",
           backgroundColor: "rgba(0,0,0,0.3)",
@@ -84,12 +84,12 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center z-10"
         >
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase mb-4">
+          <h2 className="text-2xl md:text-6xl font-extrabold text-white uppercase mb-4">
             About Me
           </h2>
-          <p className="text-xl text-white max-w-2xl mx-auto">
+          {/* <p className="text-xl text-white max-w-2xl mx-auto">
             Crafting meaningful gifts with passion and creativity
-          </p>
+          </p> */}
         </motion.div>
       </section>
 

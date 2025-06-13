@@ -6,44 +6,50 @@ const products = [
   {
     id: 1,
     title: "Transparent Box Hamper",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625192/WhatsApp_Image_2025-06-09_at_8.27.01_PM_otc1ri.jpg",
+    image:
+      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625192/WhatsApp_Image_2025-06-09_at_8.27.01_PM_otc1ri.jpg",
     size: "md:row-span-2",
-    category: "Hamper Gifts"
+    category: "Hamper Gifts",
   },
   {
     id: 2,
     title: "Birthday",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
+    image:
+      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
     size: "md:col-span-2 md:row-span-2",
-    category: "Birthday hampers"
+    category: "Birthday hampers",
   },
   {
     id: 3,
     title: "Frame",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625184/WhatsApp_Image_2025-06-09_at_8.26.57_PM_1_oc7d8e.jpg",
+    image:
+      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625184/WhatsApp_Image_2025-06-09_at_8.26.57_PM_1_oc7d8e.jpg",
     size: "",
-    category: "Photo Frames"
+    category: "Photo Frames",
   },
   {
     id: 4,
     title: "Kids Hampers",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625171/WhatsApp_Image_2025-06-09_at_8.26.45_PM_ylgel9.jpg",
+    image:
+      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625171/WhatsApp_Image_2025-06-09_at_8.26.45_PM_ylgel9.jpg",
     size: "md:row-span-2",
-    category: "Kids Gifts"
+    category: "Kids Gifts",
   },
   {
     id: 5,
     title: "Birthday Gift",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.53_PM_1_rpglgp.jpg",
+    image:
+      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.53_PM_1_rpglgp.jpg",
     size: "",
-    category: "Birthday Gift Items"
+    category: "Birthday Gift Items",
   },
   {
     id: 6,
     title: "Hampers",
-    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749449530/4_gqobpb.png",
+    image:
+      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749449530/4_gqobpb.png",
     size: "md:col-span-2",
-    category: "Accessories"
+    category: "Accessories",
   },
 ];
 
@@ -53,20 +59,18 @@ const itemVariants = {
 };
 
 export default function FeaturedProducts() {
-
-
   const navigate = useNavigate();
 
-const handleRedirect = () => {
-  navigate("/collection");
-  setTimeout(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, 100); // slight delay to ensure page transition
-};
+  const handleRedirect = () => {
+    navigate("/collection");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100); // slight delay to ensure page transition
+  };
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       {/* Section Header */}
-      <motion.div 
+      <motion.div
         className="text-center mb-12 md:mb-16"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +104,7 @@ const handleRedirect = () => {
           >
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
-            
+
             {/* Category Tag */}
             <div className="absolute top-3 right-3 bg-white/90 text-xs font-medium px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
               {product.category}
@@ -117,7 +121,7 @@ const handleRedirect = () => {
                 <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-1 sm:mb-2">
                   {product.title}
                 </h3>
-                
+
                 {/* <motion.button
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
@@ -133,21 +137,20 @@ const handleRedirect = () => {
       </div>
 
       {/* View All Button */}
-     <motion.div 
-  className="text-center mt-10 md:mt-14"
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  transition={{ delay: 0.4 }}
-  viewport={{ once: true }}
->
-  <button
-    onClick={handleRedirect}
-    className="px-8 py-3 bg-gray-800 text-white font-medium rounded-full hover:bg-gray-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-  >
-    View All Collections
-  </button>
-</motion.div>
-
+      <motion.div
+        className="text-center mt-10 md:mt-14"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        viewport={{ once: true }}
+      >
+        <button
+          onClick={handleRedirect}
+          className="px-8 py-3 bg-gray-800 text-white font-medium rounded-full hover:bg-gray-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+        >
+          View All Collections
+        </button>
+      </motion.div>
     </section>
   );
 }

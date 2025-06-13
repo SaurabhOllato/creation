@@ -30,13 +30,13 @@ const testimonials = [
     location: "Pune",
   },
   {
-    name: "Neha Verma",
+    name: "Priyanka Sharma",
     comment:
       "Beautifully packed, amazing quality, and such sweet communication. I’ll definitely order again.",
     location: "Pune",
   },
   {
-    name: "Neha Verma",
+    name: "Poonam Chaurasia",
     comment:
       "Beautifully packed, amazing quality, and such sweet communication. I’ll definitely order again.",
     location: "Pune",

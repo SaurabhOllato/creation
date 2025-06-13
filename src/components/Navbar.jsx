@@ -120,7 +120,7 @@ const Navbar = () => {
         <ul
           className={`${
             scrolled ? "bg-white" : "bg-white-900/95"
-          } text-center py-4 px-6 space-y-4 backdrop-blur-md`}
+          } text-center py-4 px-6 space-y-4 backdrop-blur-md text-black`}
         >
           {navItems.map((item) => (
             <li key={item.href}>
