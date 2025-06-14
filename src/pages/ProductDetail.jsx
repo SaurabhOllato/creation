@@ -52,7 +52,12 @@ export default function ProductDetail() {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <div className="p-10 text-center"><LoadingScreen /></div>;
+  if (loading)
+    return (
+      <div className="p-10 text-center">
+        <LoadingScreen />
+      </div>
+    );
   if (!product)
     return <div className="p-10 text-center">Product not found</div>;
 
@@ -91,7 +96,7 @@ export default function ProductDetail() {
 
         <div className="grid md:grid-cols-2 gap-8 ">
           {/* Image Swiper Section */}
-<div className="w-full h-80 sm:h-96 md:h-[500px] overflow-hidden rounded-lg">
+          <div className="w-full h-80 sm:h-96 md:h-[500px] overflow-hidden rounded-lg">
             <Swiper
               modules={[Autoplay, Pagination, Navigation]}
               spaceBetween={20}
@@ -202,18 +207,36 @@ export default function ProductDetail() {
                   Order via WhatsApp
                 </a>
 
-                {/* <button className="flex-1 flex items-center justify-center gap-2 border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-lg transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-            Add to Cart
-          </button> */}
+                <button
+                  onClick={() => {
+                    navigate("/collection");
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }, 100);
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-lg transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    />
+                  </svg>
+                  View More
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

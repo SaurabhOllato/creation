@@ -41,6 +41,7 @@ function App() {
           path="/"
           element={
             <>
+            
               <Hero />
               <FeaturedProducts />
               <WhatWeOffer />

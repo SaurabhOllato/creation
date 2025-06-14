@@ -39,7 +39,11 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
         visible ? "translate-y-0" : "-translate-y-full"
-      } ${scrolled ? "bg-white shadow-md text-gray-800" : "bg-transparent text-white"}`}
+      } ${
+        scrolled
+          ? "bg-white shadow-md text-gray-800"
+          : "bg-transparent text-white"
+      }`}
     >
       <div className="max-w-5xl mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
@@ -52,7 +56,11 @@ const Navbar = () => {
               className="h-10 w-auto transition-all duration-300"
             /> */}
             <h1 className="text-xl font-medium tracking-tighter leading-none">
-              <span className={`transition-colors duration-300 ${scrolled ? "text-gray-900" : "text-white"}`}>
+              <span
+                className={`transition-colors duration-300 ${
+                  scrolled ? "text-gray-900" : "text-white"
+                }`}
+              >
                 SUHANI'S CREATIONS
               </span>
             </h1>

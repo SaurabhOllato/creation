@@ -64,7 +64,7 @@ export default function About() {
   const icons = [
     // { component: <FaFacebookF />, link: "#" },
     { component: <FaInstagram />, link: "https://www.instagram.com/suhanis_creations?igsh=MThndmU3angzczFudg=="},
-    { component: <FaYoutube />, link: "#" },
+    { component: <FaYoutube />, link: "https://youtube.com/@suhaniscreations1989?si=qvaKToIZb_Q19Azb" },
   ];
 
   return (
