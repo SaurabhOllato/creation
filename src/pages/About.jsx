@@ -62,8 +62,8 @@ export default function About() {
   ];
 
   const icons = [
-    { component: <FaFacebookF />, link: "#" },
-    { component: <FaInstagram />, link: "#" },
+    // { component: <FaFacebookF />, link: "#" },
+    { component: <FaInstagram />, link: "https://www.instagram.com/suhanis_creations?igsh=MThndmU3angzczFudg=="},
     { component: <FaYoutube />, link: "#" },
   ];
 
@@ -237,6 +237,8 @@ export default function About() {
                   className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:text-white hover:bg-pink-600 transition-colors duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
+                   target="_blank"
+                   rel="noopener noreferrer"
                 >
                   {icon.component}
                 </motion.a>
