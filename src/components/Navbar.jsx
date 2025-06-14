@@ -32,7 +32,7 @@ const Navbar = () => {
     { href: "/", text: "Home", external: true },
     { href: "/about", text: "About", external: false },
     { href: "/collection", text: "Collection", external: false },
-    { href: "#contact", text: "Contact", external: true },
+    { href: "/#contact", text: "Contact", external: true },
   ];
 
   return (

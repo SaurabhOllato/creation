@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaGift, FaHeart, FaStar, FaLeaf } from "react-icons/fa";
+import { FaGift, FaHeart, FaStar, FaLeaf, FaWhatsapp } from "react-icons/fa";
 import TestimonialSection from "./Testimonial";
 
 const features = [
@@ -21,12 +21,11 @@ const features = [
     description:
       "We use only the best materials — no compromise on look or feel.",
   },
-  {
-    icon: <FaLeaf size={28} />,
-    title: "Eco-Conscious Packaging",
-    description:
-      "Packed with care using sustainable, aesthetic-friendly materials.",
-  },
+ {
+  icon: <FaWhatsapp size={28} />,
+  title: "Easy WhatsApp Orders",
+  description: "Simply message us on WhatsApp to customize and place your order—fast and friendly service guaranteed.",
+},
 ];
 
 const fadeInUp = {

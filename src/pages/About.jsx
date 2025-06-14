@@ -71,7 +71,7 @@ export default function About() {
     <div className="bg-gray-50">
       {/* Hero Section */}
       <section
-        className="relative bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.54_PM_te1xo6.jpg')] bg-cover bg-center bg-no-repeat h-48 sm:h-64 md:h-80  flex items-center justify-center mb-12 px-6 py-10"
+        className="relative bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.54_PM_te1xo6.jpg')] bg-cover bg-center bg-no-repeat h-48 sm:h-64 md:h-[16rem] flex items-center justify-center mb-12 px-6 py-10"
         style={{
           backgroundBlendMode: "overlay",
           backgroundColor: "rgba(0,0,0,0.3)",
@@ -97,25 +97,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-6 py-12 md:py-20">
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           {/* Image Section */}
-          {/* <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="md:w-1/2 flex justify-center relative"
-          >
-            <div className="relative group">
-              <img
-                // src={aboutImg}
-                alt="About Fashion Craze"
-                className="rounded-xl shadow-2xl w-full max-w-md h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 rounded-xl" />
-              <div className="absolute bottom-0 left-0 p-6 text-white">
-                <p className="text-lg font-medium">Our Team</p>
-                <p className="text-sm">Passionate creators since 2015</p>
-              </div>
-            </div>
-          </motion.div> */}
+         
           <motion.div
             className="w-full lg:w-1/2 relative h-[500px] md:h-[600px]"
             initial="hidden"

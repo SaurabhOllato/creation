@@ -1,156 +1,233 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 const products = [
   {
-    id: 1,
+    id: "rect2rndJgFgVno6O",
     title: "Transparent Box Hamper",
-    image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625192/WhatsApp_Image_2025-06-09_at_8.27.01_PM_otc1ri.jpg",
-    size: "md:row-span-2",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625192/WhatsApp_Image_2025-06-09_at_8.27.01_PM_otc1ri.jpg",
+    size: "md:col-span-1 md:row-span-2",
     category: "Hamper Gifts",
+    // price: "₹1,299"
   },
   {
-    id: 2,
-    title: "Birthday",
-    image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
+    id: "recxIKAKZxJOOFYP8",
+    title: "Birthday Special Hamper",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749624074/WhatsApp_Image_2025-06-10_at_8.24.41_PM_3_qxrznh.jpg",
     size: "md:col-span-2 md:row-span-2",
     category: "Birthday hampers",
+    // price: "₹1,599"
   },
   {
-    id: 3,
-    title: "Frame",
-    image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625184/WhatsApp_Image_2025-06-09_at_8.26.57_PM_1_oc7d8e.jpg",
-    size: "",
+    id: "rec3qoKLmV3DP7Phx",
+    title: "Premium Photo Frame",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625184/WhatsApp_Image_2025-06-09_at_8.26.57_PM_1_oc7d8e.jpg",
+    size: "md:col-span-1 md:row-span-1",
     category: "Photo Frames",
+    // price: "₹899"
   },
   {
-    id: 4,
-    title: "Kids Hampers",
-    image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625171/WhatsApp_Image_2025-06-09_at_8.26.45_PM_ylgel9.jpg",
-    size: "md:row-span-2",
+    id: "rec6ptJWPPSWfRYCA",
+    title: "Kids Gift Hamper",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625171/WhatsApp_Image_2025-06-09_at_8.26.45_PM_ylgel9.jpg",
+    size: "md:col-span-1 md:row-span-2",
     category: "Kids Gifts",
+    // price: "₹1,199"
   },
   {
-    id: 5,
-    title: "Birthday Gift",
-    image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.53_PM_1_rpglgp.jpg",
-    size: "",
+    id: "recQCKRJTS3igxs08",
+    title: "Birthday Gift Box",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749625178/WhatsApp_Image_2025-06-09_at_8.26.53_PM_1_rpglgp.jpg",
+    size: "md:col-span-1 md:row-span-1",
     category: "Birthday Gift Items",
+    // price: "₹999"
   },
   {
-    id: 6,
-    title: "Hampers",
-    image:
-      "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749449530/4_gqobpb.png",
-    size: "md:col-span-2",
-    category: "Accessories",
+    id: "recbRZ9Ru5PK3A3Kh",
+    title: "Luxury Gift Hampers",
+    image: "https://res.cloudinary.com/dxscy1ixg/image/upload/v1749449530/4_gqobpb.png",
+    size: "md:col-span-2 md:row-span-1",
+    category: "Customized bouquet",
+    // price: "₹1,899"
   },
 ];
 
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const ProductCard = ({ product, index }) => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={itemVariants}
+      transition={{ delay: index * 0.1 }}
+      className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 ${product.size}`}
+    >
+      {/* Image */}
+      <motion.div 
+        className="absolute inset-0 bg-gray-100"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+      >
+        <img 
+          src={product.image} 
+          alt={product.title}
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </motion.div>
+      
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+      
+      {/* Content */}
+      <motion.div 
+        className="relative h-full flex flex-col justify-end p-4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        viewport={{ once: true }}
+      >
+        <div className="mb-2">
+          <motion.span 
+            className="inline-block bg-white/90 text-xs font-medium px-2 py-1 rounded-full"
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {product.category}
+          </motion.span>
+        </div>
+        <div>
+          <motion.h3 
+            className="text-white font-semibold text-sm sm:text-base line-clamp-2"
+            initial={{ y: 10 }}
+            whileInView={{ y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            {product.title}
+          </motion.h3>
+        </div>
+      </motion.div>
+      
+      {/* Link overlay */}
+      <Link 
+        to={`/product/${product.id}`} 
+        className="absolute inset-0 z-10"
+        aria-label={`View ${product.title}`}
+      />
+    </motion.div>
+  );
 };
 
 export default function FeaturedProducts() {
   const navigate = useNavigate();
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.2,
+    triggerOnce: true
+  });
 
-  const handleRedirect = () => {
-    navigate("/collection");
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 100); // slight delay to ensure page transition
+  React.useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        when: "beforeChildren"
+      }
+    }
   };
+
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      {/* Section Header */}
-      <motion.div
-        className="text-center mb-12 md:mb-16"
+    <motion.section 
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={containerVariants}
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20"
+    >
+      {/* Header */}
+      <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
+        className="text-center mb-12"
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-          Featured Products
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Discover our exquisite collection of handcrafted gifts.
-        </p>
+        <motion.h2 
+          className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          Featured Collections
+        </motion.h2>
+        <motion.p 
+          className="text-lg text-gray-600 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          Handcrafted with love, perfect for every occasion
+        </motion.p>
       </motion.div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 auto-rows-[150px] sm:auto-rows-[180px] md:auto-rows-[200px]">
+      {/* Dynamic Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[160px] md:auto-rows-[200px]">
         {products.map((product, index) => (
-          <motion.div
-            key={product.id}
-            className={`relative overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 ${product.size} group`}
-            style={{
-              backgroundImage: `url(${product.image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
-
-            {/* Category Tag */}
-            <div className="absolute top-3 right-3 bg-white/90 text-xs font-medium px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-              {product.category}
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 h-full w-full flex flex-col justify-end p-3 sm:p-4">
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
-              >
-                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-1 sm:mb-2">
-                  {product.title}
-                </h3>
-
-                {/* <motion.button
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                  className="text-xs sm:text-sm bg-white text-gray-900 font-medium px-3 py-1 sm:px-4 sm:py-2 rounded-full hover:bg-gray-100 transition-all shadow-sm hover:shadow-md"
-                >
-                  View Details
-                </motion.button> */}
-              </motion.div>
-            </div>
-          </motion.div>
+          <ProductCard key={product.id} product={product} index={index} />
         ))}
       </div>
 
       {/* View All Button */}
       <motion.div
-        className="text-center mt-10 md:mt-14"
+        className="text-center mt-12"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.5 }}
         viewport={{ once: true }}
       >
-        <button
-          onClick={handleRedirect}
-          className="px-8 py-3 bg-gray-800 text-white font-medium rounded-full hover:bg-gray-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+        <motion.button
+          onClick={() => navigate('/collection')}
+          className="inline-flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-full transition-colors duration-300 shadow-md hover:shadow-lg"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           View All Collections
-        </button>
+          <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </motion.button>
       </motion.div>
-    </section>
+    </motion.section>
   );
 }

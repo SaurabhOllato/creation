@@ -1,7 +1,23 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { FaInstagram, FaEnvelope, FaPhone } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 export default function ContactSection() {
+    const location = useLocation();
+
+
+    useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }, 100); // slight delay to ensure page renders
+      }
+    }
+  }, [location]);
   return (
     <section
       id="contact"

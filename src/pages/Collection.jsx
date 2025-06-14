@@ -265,7 +265,8 @@ import { motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { FaWhatsapp } from "react-icons/fa";
-import { XMarkIcon } from "@heroicons/react/16/solid";
+import { CubeTransparentIcon, XMarkIcon } from "@heroicons/react/16/solid";
+import { useNavigate } from "react-router-dom";
 
 // Environment Variables
 const token = import.meta.env.VITE_AIRTABLE_TOKEN;
@@ -283,6 +284,7 @@ export default function Collection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -311,6 +313,7 @@ export default function Collection() {
           category: rec.fields?.Category || "Uncategorized",
           image:
             rec.fields?.Image?.[0]?.url || "https://via.placeholder.com/300",
+            
           price: rec.fields?.Price || 0,
           rating: rec.fields?.Rating || 0,
         }));
@@ -328,7 +331,7 @@ export default function Collection() {
   }, []);
 
   const categories = [
-    "All",
+    
     ...Array.from(new Set(products.map((p) => p.category))),
   ].filter(Boolean);
 
@@ -340,7 +343,7 @@ export default function Collection() {
   return (
     <section className="relative">
   {/* Hero Banner - Improved with better contrast and responsive height */}
-  <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749711275/hero_xxg4hp.jpg')] bg-cover bg-center h-56 sm:h-72 md:h-96 lg:h-[28rem] flex items-center justify-center relative">
+  <div className="bg-[url('https://res.cloudinary.com/dxscy1ixg/image/upload/v1749711275/hero_xxg4hp.jpg')] bg-cover bg-center h-56 sm:h-72 md:h-96 lg:h-[16rem] flex items-center justify-center relative">
     <div className="absolute inset-0 bg-black/40"></div>
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -409,7 +412,9 @@ export default function Collection() {
             <motion.button
               key={category}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setSelectedCategory(category === 'All' ? null : category)}
+              // onClick={() => setSelectedCategory(category === 'All' ? null : category)}
+              onClick={() => setSelectedCategory(category)}
+
               className={`px-4 py-2 text-sm rounded-full border font-medium whitespace-nowrap transition-colors ${
                 (category === 'All' && !selectedCategory) || selectedCategory === category
                   ? "bg-black text-white border-black"
@@ -444,7 +449,8 @@ export default function Collection() {
           >
             <div
               className="relative aspect-square overflow-hidden cursor-pointer"
-              onClick={() => setSelectedProduct(product)}
+              // onClick={() => setSelectedProduct(product)}
+              onClick={() => navigate(`/product/${product.id}`)}
               aria-label={`View details for ${product.name}`}
             >
               <LazyLoadImage
@@ -463,12 +469,12 @@ export default function Collection() {
               </h3>
               <div className="mt-3 flex justify-between items-center">
                 <span className="text-xs text-gray-500">{product.category}</span>
-                <button 
-                  onClick={() => setSelectedProduct(product)}
-                  className="text-xs font-medium text-gray-700 hover:text-black"
-                >
-                  Quick view
-                </button>
+              <button
+  onClick={() => navigate(`/product/${product.id}`)}
+  className="text-xs font-medium text-gray-700 hover:text-black"
+>
+  View Product
+</button>
               </div>
             </div>
           </motion.div>
@@ -477,7 +483,7 @@ export default function Collection() {
     )}
 
     {/* Product Modal - Enhanced with more details and better buttons */}
-    {selectedProduct && (
+    {/* {selectedProduct && (
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -547,7 +553,7 @@ export default function Collection() {
           </div>
         </motion.div>
       </motion.div>
-    )}
+    )} */}
 
     {/* Empty State - More visually appealing */}
     {!loading && !error && filteredProducts.length === 0 && (
