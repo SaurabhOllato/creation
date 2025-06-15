@@ -136,7 +136,7 @@ export default function ProductDetail() {
 
             <div className="mt-6">
               <div className="mt-6 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-800 font-sans">
+                <h3 className="text-lg font-semibold text-gray-800 font-sans text-justify">
                   {product.description}
                 </h3>
               </div>
